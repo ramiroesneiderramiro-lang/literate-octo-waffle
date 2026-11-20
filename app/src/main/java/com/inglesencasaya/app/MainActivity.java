@@ -101,10 +101,10 @@ public class MainActivity extends Activity {
             .setCancelable(false).setPositiveButton("Continuar",(d,w)->{
                 question++;
                 if(hearts==0){screen();label("❤️ Sin corazones",26,true);label("Vuelve a intentarlo para continuar.",17,false);button("Reintentar",()->start(unit),false);}
-                else if(question<questions[unit].length)quiz();else finish();
+                else if(question<questions[unit].length)quiz();else finishLesson();
             }).show();
     }
-    private void finish(){
+    private void finishLesson(){
         int xp=correct*10;
         prefs.edit().putInt("xp",prefs.getInt("xp",0)+xp).putBoolean("done_"+unit,true)
             .putInt("unlocked",Math.max(unlocked(),Math.min(unit+1,units.length-1))).apply();
