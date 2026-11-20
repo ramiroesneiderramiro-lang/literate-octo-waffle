@@ -54,11 +54,24 @@ public class MainActivity extends Activity {
         if(bold)t.setTypeface(null,Typeface.BOLD);t.setPadding(6,12,6,12);root.addView(t);return t;
     }
     private void button(String s,Runnable action,boolean secondary) {
-        Button b=new Button(this);b.setAllCaps(false);b.setText(s);b.setTextSize(16);
-        b.setTextColor(secondary?purple:Color.WHITE);b.setBackground(shape(secondary?Color.rgb(231,222,255):purple));
-        LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,66);p.setMargins(0,8,0,8);root.addView(b,p);
+        Button b=new Button(this);
+        b.setAllCaps(false);
+        b.setText(s);
+        b.setTextSize(17);
+        b.setGravity(Gravity.CENTER);
+        b.setIncludeFontPadding(true);
+        b.setSingleLine(false);
+        b.setMaxLines(3);
+        b.setPadding(dp(18),dp(12),dp(18),dp(12));
+        b.setMinHeight(dp(64));
+        b.setTextColor(secondary?purple:Color.WHITE);
+        b.setBackground(shape(secondary?Color.rgb(231,222,255):purple));
+        LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,LinearLayout.LayoutParams.WRAP_CONTENT);
+        p.setMargins(0,dp(8),0,dp(8));
+        root.addView(b,p);
         b.setOnClickListener(v->action.run());
     }
+    private int dp(int n){return (int)(n*getResources().getDisplayMetrics().density+0.5f);}
     private int unlocked(){return prefs.getInt("unlocked",0);}
     private void home(){
         screen();label("✦ INGLÉS EN CASA YA",18,true).setTextColor(purple);
